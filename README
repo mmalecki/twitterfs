@@ -1,0 +1,28 @@
+                                         WWNXNWW                     
+                                       WKkkxkO0N                     
+                   XKXNW              XkxxxxkkO0KW                   
+                   NkxxxO0XN         KxxxxxxxxxxxxON                 
+                    WKkxxxxxk0XN    KxxxxxxxxxxxxxxxX                
+                    NOkxxxxxxxxxkKWXxxxxxxxxxxxxxxxxxX               
+                     Kkxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxk0KK0KW         
+                      WXOxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxO0XWW         
+                      WOxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxkOOKXW         
+                        NK0kxxxxxxxxxxxxxxxxxxxxxxxxx0               
+                          XxxxxxxxxxxxxxxxxxxxxxxxxxOW               
+                          WX0kxxxxxxxxxxxxxxxxxxxxx0W                
+             NXN         WNKkxxxxxxxxxxxxxxxxxxxxON                  
+              WKkO00000OOxxxxxxxxxxxxxxxxxxxxxxON                    
+                 X0kxxxxxxxxxxxxxxxxxxxxxxxk0XW                      
+                    NX0OkxxxxxxxxxxxxxkOKXN                          
+                         WNNXXXXXXXNWW                       
+
+                    _            _ _   _             __     
+                   | |          (_) | | |           / _|    
+                   | |___      ___| |_| |_ ___ _ __| |_ ___ 
+                   | __\ \ /\ / / | __| __/ _ \ '__|  _/ __|
+                   | |_ \ V  V /| | |_| ||  __/ |  | | \__ \
+                    \__| \_/\_/ |_|\__|\__\___|_|  |_| |___/
+
+
+twitterfs is a simple FUSE filesystem based on Twitter API and Tweepy
+library I wrote to get familiar with FUSE and it's Python bindings.
