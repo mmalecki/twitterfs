@@ -83,10 +83,10 @@ class Directory(inode):
         return Stat(st_mode=self.mode, st_nlink=2)
     
     def readdir(self):
-        """ Yields each inode, including special (., ..) and dynamical ones """      
+        """ Yields each inode, including special (., ..) and dynamical ones """
         yield Directory("..")
         yield Directory(".", self.mode)
-        for inode in self.inodes:
+        for inode in self.inodes.itervalues():
             yield inode
         for inode in self._get_dynamic_inodes():
             yield inode
