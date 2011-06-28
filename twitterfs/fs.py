@@ -2,18 +2,16 @@ import fuse
 import errno
 import stat
 import logging
-import inodes
 import os
 
 from inodes import Directory
+from utils import repr_
 
 fuse.fuse_python_api = (0, 2)
 
 class TwitterFS(fuse.Fuse):
     def __init__(self, *args, **kwargs):
-        logging.debug("%s.__init__(self, %s, %s)" % (repr(self),
-                                                     repr(args), 
-                                                     repr(kwargs))) 
+        logging.debug("%s.__init__(self, %s, %s)" % repr_(self, args, kwargs)) 
         fuse.Fuse.__init__(self, *args, **kwargs)
         logging.debug("Fuse.__init__'ialized")
         
@@ -25,18 +23,17 @@ class TwitterFS(fuse.Fuse):
                                  
     
     def fsinit(self):
-        logging.debug("%s.fuse_args = %s" % (repr(self), self.fuse_args))
+        logging.debug("%s.fuse_args = %s" % repr_(self, self.fuse_args))
         logging.info('Initializing TwitterFS at ' + self.mountpoint)
     
     def getattr(self, path):
-        logging.debug("%s.getattr(self, %s)" % (repr(self), repr(path)))
+        logging.debug("%s.getattr(self, %s)" % repr_(self, path))
         inode = self.find_inode(self.main_dir, path)
         return inode.to_stat() if inode else -errno.ENOENT
     
     def find_inode(self, inode, path):
-        logging.debug("%s.find_inode(self, %s, %s)" % (repr(self), 
-                                                       repr(inode), 
-                                                       repr(path)))
+        logging.debug("%s.find_inode(self, %s, %s)" % repr_(self, inode, path))
+        
         path = path.lstrip("/")
         if path == "":
             return inode
@@ -51,9 +48,8 @@ class TwitterFS(fuse.Fuse):
                     return self.find_inode(inode.inodes[name], path)
     
     def readdir(self, path, offset):
-        logging.debug("%s.readdir(self, %s, %s)" % (repr(self), 
-                                                    repr(path), 
-                                                    repr(offset)))
+        logging.debug("%s.readdir(self, %s, %s)" % repr_(self, path, offset))
+        
         inode = self.find_inode(self.main_dir, path)
         if inode:
             return map(lambda i: i.to_direntry(), inode.readdir())
