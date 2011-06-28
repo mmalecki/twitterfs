@@ -23,6 +23,9 @@ class inode(object):
     def __init__(self, name, mode=0755):
         self.name = name
         self.mode = mode
+    
+    def __repr__(self):
+        return "<inode('%s')>" % self.name
         
     def to_direntry(self):
         """ Returns corresponding Direntry object, used by FUSE to list inodes 
