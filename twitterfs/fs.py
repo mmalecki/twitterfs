@@ -3,24 +3,35 @@ import errno
 import stat
 import logging
 import os
+import tweepy
 
 from inodes import Directory
+from twitterinodes import PeopleDirectory
 from utils import repr_
 
 fuse.fuse_python_api = (0, 2)
 
 class TwitterFS(fuse.Fuse):
-    def __init__(self, *args, **kwargs):
+    CONSUMER_KEY = 'iEyGq60O1zFcjk6MqYEd9g'
+    CONSUMER_SECRET = 'cgYi2UuPYOHeOrVdMv9gZqVKiEIXcgSxFH5OUGg9ftE'
+
+    def __init__(self, settings, *args, **kwargs):
         logging.debug("%s.__init__(self, %s, %s)" % repr_(self, args, kwargs)) 
         fuse.Fuse.__init__(self, *args, **kwargs)
         logging.debug("Fuse.__init__'ialized")
         
+        self.settings = settings
+
         self.main_dir = Directory("/", 0755)
-        
         self.main_dir.inodes = { "followers" : Directory("followers", 0555),
                                  "following" : Directory("following"),
                                  "me" : Directory("me") }
-                                 
+
+        self._auth = tweepy.OAuthHandler(self.CONSUMER_KEY,
+                                         self.CONSUMER_SECRET)
+        self._auth.set_access_token(settings['access_token'], 
+                                    settings['access_token_secret'])
+        self.api = tweepy.API(self._auth)
     
     def fsinit(self):
         logging.debug("%s.fuse_args = %s" % repr_(self, self.fuse_args))

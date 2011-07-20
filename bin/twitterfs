@@ -4,7 +4,20 @@ if __name__ == "__main__":
     import logging
     import sys
     import os.path
-    
+    import imp
+
+    def get_settings():
+        # Better ideas for including settings file?
+        path = os.path.join(os.path.dirname(__file__), '.twitfs-settings.py')
+        if os.path.exists(path):
+            return imp.load_source('settings', path).settings
+        else:
+            path = os.path.expanduser('~/.twitfs-settings.py')
+            if os.path.exists(path):
+                return imp.load_source('settings', path).settings
+            else:
+                return {}
+
     try:
         from twitterfs.fs import TwitterFS 
     except ImportError:
@@ -20,7 +33,6 @@ if __name__ == "__main__":
     sys.stderr = open(os.path.expanduser('~/.twitterfs-stderr'), 'a')
     # we get detached from console somewhere in this code block below, so let's
     # redirect outputs to files
-    
-    fs = TwitterFS()
+    fs = TwitterFS(get_settings())
     fs.parse()
     fs.main()
