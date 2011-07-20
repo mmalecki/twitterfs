@@ -11,7 +11,7 @@ from utils import repr_
 
 fuse.fuse_python_api = (0, 2)
 
-class TwitterFS(fuse.Fuse):
+class TwitFS(fuse.Fuse):
     CONSUMER_KEY = 'iEyGq60O1zFcjk6MqYEd9g'
     CONSUMER_SECRET = 'cgYi2UuPYOHeOrVdMv9gZqVKiEIXcgSxFH5OUGg9ftE'
 
@@ -35,7 +35,7 @@ class TwitterFS(fuse.Fuse):
     
     def fsinit(self):
         logging.debug("%s.fuse_args = %s" % repr_(self, self.fuse_args))
-        logging.info('Initializing TwitterFS at ' + self.mountpoint)
+        logging.info('Initializing TwitFS at ' + self.mountpoint)
     
     def getattr(self, path):
         logging.debug("%s.getattr(self, %s)" % repr_(self, path))

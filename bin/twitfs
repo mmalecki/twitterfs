@@ -19,20 +19,20 @@ if __name__ == "__main__":
                 return {}
 
     try:
-        from twitterfs.fs import TwitterFS 
+        from twitfs.fs import TwitFS
     except ImportError:
         import sys
         sys.path.append(os.path.dirname(__file__) + '/..')
-        from twitterfs.fs import TwitterFS
+        from twitfs.fs import TwitFS
         sys.path.pop()
     
     logging.basicConfig(level=logging.DEBUG, 
-                        filename=os.path.expanduser('~/.twitterfs-log'))
+                        filename=os.path.expanduser('~/.twitfs-log'))
     
-    sys.stdout = open(os.path.expanduser('~/.twitterfs-stdout'), 'a') 
-    sys.stderr = open(os.path.expanduser('~/.twitterfs-stderr'), 'a')
+    sys.stdout = open(os.path.expanduser('~/.twitfs-stdout'), 'a') 
+    sys.stderr = open(os.path.expanduser('~/.twitfs-stderr'), 'a')
     # we get detached from console somewhere in this code block below, so let's
     # redirect outputs to files
-    fs = TwitterFS(get_settings())
+    fs = TwitFS(get_settings())
     fs.parse()
     fs.main()
