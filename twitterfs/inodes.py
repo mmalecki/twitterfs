@@ -76,7 +76,7 @@ class Directory(inode):
         
         if self.getter is not None:
             items = self.getter(*self.getter_args, **self.getter_kwargs)
-            return items if self.mapper is None else map(self.mapper, items)
+            return map(self.mapper, items)
         else:
             return [ ]
         # That seems... functional.
